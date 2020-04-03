@@ -1,0 +1,94 @@
+<!--
+ * Copyright 2015-2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="example.css">
+</head>
+
+<body>
+    <div class="container block" id="connecting-div">
+        <div>
+            <img class="logo" src="./assets/logo.png" />
+        </div>
+        <p>attempting to connect to aws iot...</p>
+    </div>
+    <div id="dashboard-container" class="dashboard-container">
+        <div class="section-heading">Dashboard</div>
+        <div class="sensor-values-container">
+            <div class="moisture-sensor" onclick="showAnalytics('moisture')">
+                <div class="data-container">
+                    <div class="data-type">Soil Moisture</div class="data-type">
+                    <div>
+                        <span id="moisture-data">0</span>
+                        <span class="unit">%</span class="unit">
+               </div>
+               <div class="status">Nomral Range: 41% - 80%</div>
+            </div>
+            <div class="image-container">
+               <img src="./assets/moisture.png"/>
+            </div>
+         </div>
+         <div class="light-sensor" onclick="showAnalytics('light')">
+            <div class="data-container">
+               <div class="data-type">Warehouse Light Intensity</div class="data-type">
+               <div>
+                  <span id="light-data">0</span>
+                        <span class="unit">%</span>
+                    </div>
+                    <!-- <div class="status">Nomral Range: 18° - 24°C</div> -->
+                </div>
+                <div class="image-container">
+                    <img src="./assets//light.png" />
+                </div>
+            </div>
+            <div class="temperature-sensor">
+                <div class="data-container">
+                    <div class="data-type">Warehouse Temperature</div>
+                    <div>
+                        <span>19</span>
+                        <span class="unit">&deg;C</span class="unit">
+               </div>
+               <div class="status">Nomral Range: 18° - 24°C</div>
+            </div>
+            <div class="image-container">
+               <img src="./assets/temp.png"/>
+            </div>
+         </div>
+      </div>
+      <div class="charts-container">
+         <canvas id="lightChart" width="400" height="400"></canvas>
+         <canvas id="moistureChart" width="400" height="400"></canvas>
+      </div>
+   </div>
+
+   <script src="aws-iot-sdk-browser-bundle.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha256-8zyeSXm+yTvzUN1VgAOinFgaVFEFTyYzWShOy9w7WoQ=" crossorigin="anonymous"></script>
+   <script src="bundle.js"></script>
+   <script>
+      function showAnalytics(type) {
+         if (type == 'moisture') {
+            document.getElementById('moistureChart').style.display = 'block';
+            document.getElementById('lightChart').style.display = 'none';
+         } else {
+            document.getElementById('moistureChart').style.display = 'none';
+            document.getElementById('lightChart').style.display = 'block';
+         }
+      }
+</script>
+</body>
+</html>
